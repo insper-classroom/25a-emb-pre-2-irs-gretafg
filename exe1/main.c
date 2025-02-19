@@ -9,7 +9,7 @@ void btn_callback(uint gpio, uint32_t events) {
   if (events == 0x4) { // fall edge
     btn_flag = 1;
   } else if (events == 0x8) { // rise edge
-    btn_flag = 2;
+    btn_flag = 0;
   }
 }
 
@@ -26,9 +26,11 @@ int main() {
   while (true) {
     if (btn_flag == 1){
       printf("fall \n");
-    } else if (btn_flag == 2) {
-      ("rise \n");
+      btn_flag = 2;
+    }
+    if (btn_flag == 0) {
+      printf("rise \n");
+      btn_flag = 2;
     } 
-    btn_flag = 0;
   }
 }
